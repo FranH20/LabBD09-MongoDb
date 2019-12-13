@@ -40,7 +40,9 @@
 	\item Computadora con sistema operativo Windows XP, Vista, Windows 7, Windows 8 y/o Windows 8.1.
 	\item CPU SLAT-capable feature al menos 4GB de RAM
 	\item Docker Desktop (Para lo cual se debe primero crear una cuenta en Docker Hub)
-	\item Microsoft SQL Server Management Studio en su última versión
+	\item Studio 3T
+	\item Documento JSON
+	\item ISO MongoDB
 \end{itemize}
 
 %% ----------------------------------------------------------------------------------------------------------------------------------
@@ -54,6 +56,10 @@
 
 \subsection {\textbf{Docker}}
 Docker se define como un proyecto de código abierto que proporciona una capa de abstracción y virtualización a nivel de sistema operativo, a través de la instalación de contenedores de software.
+
+\subsection {\textbf{MongoDB}}
+MongoDB (del inglés humongous, enorme) es un sistema de base de datos NoSQL orientado a documentos de código abierto.\\
+En lugar de guardar los datos en tablas, tal y como se hace en las bases de datos relacionales, MongoDB guarda estructuras de datos BSON (una especificación similar a JSON) con un esquema dinámico, haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida.
 
 \section{PROCEDIMIENTO}
 
@@ -99,85 +105,51 @@ Docker se define como un proyecto de código abierto que proporciona una capa de
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=12cm]{./IMAGENES/foto6} 
-		\caption{Buscamos la Iso para descargar}
+		\caption{Para importar datos utilizaremos el software Studio 3T}
+	\end{center}
+\end{figure}
+
+\subsubsection{\textbf{Paso 3: Consultas con la base de datos MongoDb}}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=07cm]{./IMAGENES/foto7} 
+		\caption{Mostramos las bases de datos creadas}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto7} 
-		\caption{Descargamos la iso definida}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto8} 
-		\caption{Descargamos la iso definida}
+		\includegraphics[width=07cm]{./IMAGENES/foto8} 
+		\caption{Usaremos la base de datos llamada Alumnos}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=12cm]{./IMAGENES/foto9} 
-		\caption{Revisamos si tenemos descargado la ISO}
+		\caption{Ingresamos el siguiente comando: db.getCollection( 'mongodb-consultas' ).find().skip(359)}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=12cm]{./IMAGENES/foto10} 
-		\caption{Instalamos nuestro primer contenedor con MSSQL-Server}
+		\caption{Ingresamos el siguiente comando: db.getCollection( 'mongodb-consultas' ).find().skip(359).pretty()}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=12cm]{./IMAGENES/foto11} 
-		\caption{Verificamos que tenemos instalado}
+		\caption{Ahora verificaremos los campos que esten en estado activo con el siguiente comando: db.getCollection( 'mongodb-consultas' ).find( 'isActive' : true ); }
 	\end{center}
 \end{figure}
 
-\subsubsection{\textbf{Paso 3: Conectarnos a la base de datos mediante Microsoft SQL Server Management Studio}}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=12cm]{./IMAGENES/foto12} 
-		\caption{Ingresamos a Management Studio}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto13} 
-		\caption{Ingresamos la ip local nuestro cuenta y contraseña establecida al momento de instalación}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto14} 
-		\caption{Como podemos visualizar ya nos podemos conectar a nuestra base de datos y visualizar que sale la ID del contenedor}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto15} 
-		\caption{Como podemos visualizar ya nos podemos conectar a nuestra base de datos y visualizar que sale la ID del contenedor}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto16} 
-		\caption{También podemos visualizar nuestra versión}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto17} 
-		\caption{Por último eliminamos nuestra contenedor.}
+		\caption{Vemos los resultados de la consulta anterior}
 	\end{center}
 \end{figure}
 
@@ -186,35 +158,16 @@ Docker se define como un proyecto de código abierto que proporciona una capa de
 	\item ¿Qué indican los resultados? \\
 	Pudimos realizar exitosamente la conexión de nuestro contenedor a la base de datos
 	\item ¿Que se ha encontrado?\\
-	Encontré una manera más rápida de poder tener una base de datos SQL Server sin necesidad de estar haciendo toda la instalación necesaria del MSSQL en mi computadora.
+	Encontré una manera más rápida de poder realizar consultas mediante NoSQL Mongo DB mediante una importacion desde un archivo JSON.
 \end{itemize}
 
-\section{CUESTIONARIO}
-\begin{itemize}
-	\item ¿Con qué comando(s) exportaría la imagen de Docker de Microsoft SQL Server a otra PC o servidor? \\
-	Con el comando: docker push Tunombre/my-first-repo
-	\item ¿Con qué comando(s) podría generar dos volúmenes para un contenedor para distribuir en un volumen el Archivo de Datos (.mdf) y en otro el Archivo Log (.ldf)?\\
-	docker volume create ArchivodeDatos.mdf \\
-	docker volume create ArchivodeLog.ldf
-	\item Genere un nuevo contenedor y cree la base de datos con las siguientes características.\\
-	Nombre : FINANCIERA\\
-	Archivos : \\
-	DATOS (mdf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado \\
-	INDICES (ndf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB \\
-	HISTORICO (ndf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado \\
-	LOG (ldf) Tamaño Inicial : 10MB, Incremento: 10MB, Ilimitado \\
-	¿Cuál sería el script SQL que generaría esta base de datos?
-	
-	\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=12cm]{./IMAGENES/foto18} 
-		\caption{Script planteado}
-	\end{center}
-	\end{figure}
-
-\end{itemize}
 
 \section{CONCLUSION}
-En conclusión, los contenedores nos ayudan a montar nuestra base de datos de forma mas rápida para poder manejar nuestros diversos sistemas a implementarlos y conectarlos, a su vez también aprendí que los ISO nos vienen a permitir con Docker subirlas para poder usarlas en otras ocasiones.
+En conclusión, Las bases de datos NoSQL son una tecnología muy potente y variada que, si se sabe
+emplear de forma correcta, resulta ser una herramienta valiosísima que permitirá
+almacenar grandes cantidades de datos y extraer conocimiento de ellos de forma
+eficiente, tan necesario hoy en día debido al fenómeno BigData. No en vano, los puestos
+profesionales de informáticos que poseen conocimientos sobre alguna de estas
+tecnologías se están comenzando a demandar ampliamente
 
 \end{document}
